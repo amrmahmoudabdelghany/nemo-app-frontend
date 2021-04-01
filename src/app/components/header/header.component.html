@@ -1,0 +1,57 @@
+
+	<div class=" header-container" >
+		<a th:href="@{/}"> <img class="header-image" alt="My Image "
+			src="assets/content/images/nemo-header-img.jpg">
+		</a>
+		<div align="center"   class="menu">
+
+			<ul class="menu-items">
+
+				<!-- 	
+						 Stock             -->
+				<li #stock class="menu-item " (click) = "onSelectNavItem(stock)" ><a
+					routerLink="" > <img class="menu-item-image" alt="stock" (click) = "onSelectNavItem(stock)" 
+						src="assets/content/images/stock.png" /> <br> <span>&nbsp;&nbsp;Stock</span>
+				</a>
+			  
+			</li>
+
+				<!-- 			 Items              -->
+				<li #items class="menu-item " (click) = "onSelectNavItem(items)"><a
+					routerLink="/items"> <img  class="menu-item-image" (click) = "onSelectNavItem(items)" alt="items"
+					src="assets/content/images/fishing.png" /> <br> <span>&nbsp;&nbsp;Items</span>
+				</a></li>
+
+				<!-- 			 Sales              -->
+				<li #sales class="menu-item" (click) = "onSelectNavItem(sales)" ><a
+					routerLink="/sales"> <img class="menu-item-image" alt="sales" (click) = "onSelectNavItem(sales)"
+						src="assets/content/images/sales.png" /> <br> <span>&nbsp;&nbsp;Sales</span>
+				</a></li>
+				 <!--              Expenses                         -->
+					<li #expenses class="menu-item " (click) = "onSelectNavItem(expenses)"><a
+					routerLink="/expenses"> <img class="menu-item-image" alt="expenses" (click) = "onSelectNavItem(expenses)"
+						src="assets/content/images/goods.png" /> <br> <span>&nbsp;&nbsp;Expenses</span>
+				</a></li>
+				
+				<!-- 			 Perished             -->
+				<li #perished class="menu-item" (click) = "onSelectNavItem(perished)">
+					<a routerLink="/perished"> <img class="menu-item-image" alt="stock" (click) = "onSelectNavItem(perished)"
+						src="assets/content/images/waste-bin.png" /> <br> <span>&nbsp;Perished</span>
+				</a></li>
+
+				<!-- 			 Archive            -->
+				<li #archive class="menu-item" (click) = "onSelectNavItem(archive)">
+					<a routerLink ="/archive"> <img class="menu-item-image" alt="archive" (click) = "onSelectNavItem(archive)"
+						src="assets/content/images/archive.png" /> <br> <span>&nbsp;Archive</span>
+				</a></li>
+				
+				<!-- 			 Statistics             -->
+				<li #statistics class="menu-item" (click) = "onSelectNavItem(statistics)"><a
+					routerLink="/statistics"> <img class="menu-item-image" alt="statistics" (click) = "onSelectNavItem(statistics)"
+						src="assets/content/images/pie-chart.png" /> <br> <span>Statistics</span>
+				</a></li>
+			</ul>
+
+		</div>
+
+	</div>
