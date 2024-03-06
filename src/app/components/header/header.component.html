@@ -9,47 +9,46 @@
 
 				<!-- 	
 						 Stock             -->
-				<li #stock class="menu-item " (click) = "onSelectNavItem(stock)" ><a
-					routerLink="" > <img class="menu-item-image" alt="stock" (click) = "onSelectNavItem(stock)" 
+				<li #stock class="menu-item btn btn-light " (click) = "onSelectNavItem(stock  ,'')" >
+					 <img class="menu-item-image" alt="stock" 
 						src="assets/content/images/stock.png" /> <br> <span>&nbsp;&nbsp;Stock</span>
-				</a>
-			  
+			
 			</li>
 
 				<!-- 			 Items              -->
-				<li #items class="menu-item " (click) = "onSelectNavItem(items)"><a
-					routerLink="/items"> <img  class="menu-item-image" (click) = "onSelectNavItem(items)" alt="items"
+				<li #items class="menu-item btn btn-light " (click) = "onSelectNavItem(items , '/items')">
+					 <img  class="menu-item-image"  alt="items"
 					src="assets/content/images/fishing.png" /> <br> <span>&nbsp;&nbsp;Items</span>
-				</a></li>
+				</li>
 
 				<!-- 			 Sales              -->
-				<li #sales class="menu-item" (click) = "onSelectNavItem(sales)" ><a
-					routerLink="/sales"> <img class="menu-item-image" alt="sales" (click) = "onSelectNavItem(sales)"
+				<li #sales class="menu-item btn btn-light" (click) = "onSelectNavItem(sales , '/sales')" >
+					 <img class="menu-item-image" alt="sales" 
 						src="assets/content/images/sales.png" /> <br> <span>&nbsp;&nbsp;Sales</span>
-				</a></li>
+			    </li>
 				 <!--              Expenses                         -->
-					<li #expenses class="menu-item " (click) = "onSelectNavItem(expenses)"><a
-					routerLink="/expenses"> <img class="menu-item-image" alt="expenses" (click) = "onSelectNavItem(expenses)"
+					<li #expenses class="menu-item btn btn-light " (click) = "onSelectNavItem(expenses , '/expenses')">
+					 <img class="menu-item-image" alt="expenses"
 						src="assets/content/images/goods.png" /> <br> <span>&nbsp;&nbsp;Expenses</span>
-				</a></li>
+				</li>
 				
 				<!-- 			 Perished             -->
-				<li #perished class="menu-item" (click) = "onSelectNavItem(perished)">
-					<a routerLink="/perished"> <img class="menu-item-image" alt="stock" (click) = "onSelectNavItem(perished)"
+				<li #perished class="menu-item btn btn-light" (click) = "onSelectNavItem(perished ,'/perished')">
+				<img class="menu-item-image" alt="stock" 
 						src="assets/content/images/waste-bin.png" /> <br> <span>&nbsp;Perished</span>
-				</a></li>
+				</li>
 
 				<!-- 			 Archive            -->
-				<li #archive class="menu-item" (click) = "onSelectNavItem(archive)">
-					<a routerLink ="/archive"> <img class="menu-item-image" alt="archive" (click) = "onSelectNavItem(archive)"
+				<li #archive class="menu-item btn btn-light" (click) = "onSelectNavItem(archive , '/archive')">
+					<img class="menu-item-image" alt="archive"
 						src="assets/content/images/archive.png" /> <br> <span>&nbsp;Archive</span>
-				</a></li>
+				</li>
 				
 				<!-- 			 Statistics             -->
-				<li #statistics class="menu-item" (click) = "onSelectNavItem(statistics)"><a
-					routerLink="/statistics"> <img class="menu-item-image" alt="statistics" (click) = "onSelectNavItem(statistics)"
+				<li #statistics class="menu-item btn btn-light" (click) = "onSelectNavItem(statistics , '/statistics')">
+					 <img class="menu-item-image" alt="statistics" 
 						src="assets/content/images/pie-chart.png" /> <br> <span>Statistics</span>
-				</a></li>
+				</li>
 			</ul>
 
 		</div>

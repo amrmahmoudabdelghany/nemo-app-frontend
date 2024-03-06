@@ -1,0 +1,103 @@
+<div class ="d-flex justify-content-between align-items-center" > 
+  <h2>{{currentCategoryName}}</h2>
+  
+  
+  <label> Search :  <input (keyup) = "applyFilter($event)" type = "text"  /> </label>
+  
+  
+  </div>
+  
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource] = "stocks" 
+    class="full-width-table table table-hover  justify-content-between" 
+     matSort matSortActive="modifyDate" matSortDirection="desc"  aria-label="Elements" multiTemplateDataRows >
+
+    <!-- Last Update Column -->
+    <ng-container matColumnDef="modifyDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Last Update</b></h4></th>
+      <td mat-cell *matCellDef="let row" >{{row.modifyDate | date:'dd/MM/y'}}</td>
+    </ng-container>
+
+
+    <!-- Item Name Column -->
+    <ng-container matColumnDef="item.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Item Name</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.item.name}}</td>
+    </ng-container>
+
+    <!-- Item Desctiption Column -->
+    <!--ng-container matColumnDef="item.description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Item Description</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.item.description}}</td>
+    </ng-container -->
+
+    
+
+       <!-- Unit Purchasing Price Column -->
+     <ng-container matColumnDef="item.purchasingPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Unit Purchasing Price</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.item.purchasingPrice}}</td>
+    </ng-container>
+
+     <!-- Unit Salling Price Column -->
+     <ng-container matColumnDef="item.sallingPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Unit Salling Price</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.item.sallingPrice}}</td>
+    </ng-container>
+      
+    
+    
+     <!-- Item Quantity Column -->
+     <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Quantity</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+    </ng-container>
+
+      <!-- Expected Profits  Column -->
+      <!--ng-container matColumnDef="expectedProfits">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Expected Profits</b></h4></th>
+        <td mat-cell *matCellDef="let row">{{row.expectedProfits}}</td>
+      </ng-container-->
+   
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail "
+               [@detailExpand]="element == selectedStock ? 'expanded' : 'collapsed'">
+            
+            
+                <p  style="white-space: pre-wrap;" class = "example-element-description">
+                  {{element.item.description}}
+                </p>
+            
+          </div>
+        </td>
+      </ng-container>
+
+    
+ 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class = "thead-dark"></tr>
+    
+    <tr  mat-row *matRowDef="let row; columns: displayedColumns;"
+     (click) = "onSelectRow(row)"
+     [class.example-expanded-row]="selectedStock === row"
+     [ngClass]="(row.id == selectedStock?.id)?'bg-info':''"></tr>
+    
+
+    <tr class="mat-row " *matNoDataRow >
+      <td class="mat-cell"  align="center"  [attr.colspan]="displayedColumns.length" >
+        <b><i>No data matching the filter ' {{filterValue}} '</i></b></td>
+    </tr>
+
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"  class=" example-detail-row"></tr >
+  </table>
+
+  <mat-paginator #paginator
+      showFirstLastButtons
+      [length]="totalElements"
+      [pageIndex]="0"
+      [pageSize]="8"
+      [pageSizeOptions]="[8, 16, 32]">
+  </mat-paginator>
+</div>

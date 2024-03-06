@@ -1,0 +1,31 @@
+
+
+
+    <div class="container list-group">
+      
+        <h2 class=" flex-grow-1  list-group-item bg-dark
+                    text-light p-3 rounded-top">
+                    <span class="material-icons">
+                      app_registration
+                      </span> &nbsp;
+                    Register</h2>
+
+
+      <button [disabled]="(selectedStock==undefined || selectedStock?.quantity == 0)"
+              (click) = "onRegisterSell()"
+          class = "btn btn-outline-secondary   btn-block list-group-item ">
+          <span class = "mater"></span>
+          Sell</button>
+
+        <button [disabled]="(selectedStock==undefined)"
+        (click) = "onRegisterBuy()"
+          class = "btn btn-outline-secondary   btn-block list-group-item ">Buy</button>
+          <button [disabled]="(selectedStock==undefined || selectedStock?.quantity == 0)"
+          (click) = "onRegisterPrishe()"
+          class = "btn btn-outline-secondary   btn-block list-group-item ">Prishe</button>
+         
+          <!--button (click) = "onRegisterReturn()"
+          class = "btn btn-outline-secondary   btn-block list-group-item ">Returned</button-->
+         
+
+</div>

@@ -1,0 +1,119 @@
+
+<div class = "card justify-content-around mx-4   "  > 
+    <div class = "card-title bg-dark text-light p-2 mb-1"> 
+      
+       
+          <h2 class = 'mx-2 my-2' >
+            <span class="material-icons">
+              search
+              </span>
+              &nbsp;
+            Filter</h2>
+           
+     
+    </div>
+<div class = "card-body p-2" >
+   
+   
+<form class= "form"> 
+
+
+    <div class = "form-group  ">   
+    <label > 
+     Categories
+    </label>
+    
+     <div class = "d-flex flex-row">
+      <span class = "material-icons input-group-prepend input-group-text" > category</span>
+   
+      <select class = "form-control" [formControl] = "category"> 
+        <option [ngValue]="selectedCategory" [selected] = "true"  > 
+           {{selectedCategory.name}}
+        </option>
+       <option *ngFor="let cat of categories" [ngValue] = "cat" [selected] = "false"> 
+           {{cat.name}}
+       </option>
+      </select>
+    </div>
+
+
+</div>
+
+
+<div class = "form-group">   
+     <label > 
+    Items
+</label>
+<div class = "d-flex flex-row">
+  <span class="material-icons input-group-prepend input-group-text">
+    filter_list
+    </span>
+       <select class = "form-control" [formControl] = "item"> 
+        <option  [ngValue] = "selectedCategory" [selected] = "true">{{selectedCategory.name}}</option>
+        <option *ngFor="let item of items" [ngValue] = "item"> 
+            {{item.name}}
+        </option>
+       </select>
+  
+</div>
+  
+</div>
+
+
+ <div class = "form-group   ">
+   <div class = "d-flex flex-grow-0"> 
+    <label> 
+      <b>From :</b> &nbsp; <span class = "text-info">{{formatter.format(fromDate) | date:'dd/MM/y'}}</span>
+  </label>
+ 
+  <label> 
+    &nbsp; <b>To :</b>&nbsp; <span class = "text-info">{{formatter.format(toDate) | date:'dd/MM/y'}}</span>
+  </label>
+
+   </div>
+
+  <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden">
+  </ngb-datepicker>
+  
+  <ng-template #t let-date let-focused="focused" >
+    <span class="custom-day"
+          [class.focused]="focused"
+          [class.range]="isRange(date)"
+          [class.faded]="isHovered(date) || isInside(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null">
+      {{ date.day }}
+    </span>
+  </ng-template>
+  <div class = " list-group mt-2 ">  
+  <button  class = "btn btn-outline-primary list-group-item my-1 d-flex " (click) = "lastWeek()">
+    <span class="material-icons " >
+    history
+    </span>
+    
+     <span class = "ml-4">Last Week
+        </span></button>
+  <button class = "btn btn-outline-primary list-group-item my-1 d-flex" (click) = "lastMonth()">  <span class="material-icons " >
+    history
+    </span>
+     <span class = "ml-4">Last Month
+        </span></button>
+      
+      
+ 
+      
+  <button class = "btn btn-outline-primary  list-group-item my-1 d-flex" (click) = "lastYear()" >  <span class="material-icons " >
+    history
+    </span>
+     <span class = "ml-4">Last Year
+        </span></button>
+</div>
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+

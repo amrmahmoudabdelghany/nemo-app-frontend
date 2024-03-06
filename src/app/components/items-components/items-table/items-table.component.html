@@ -1,0 +1,68 @@
+<div class ="d-flex justify-content-between align-items-center" > 
+<h2>{{currentCategoryName}}</h2>
+
+
+<label> Search :  <input (keyup) = "applyFilter($event)" type = "text"  /> </label>
+
+
+</div>
+
+
+
+<div class=" mat-elevation-z8 ">
+  
+  <table mat-table [dataSource] = "items"
+   class="full-width-table table table-hover justify-content-between"  
+   matSort matSortActive="name" matSortDirection="asc" (matSortChange) = "resetPaging()"
+   aria-label="Elements">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name" >
+      
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > <h4><b>Name</b></h4> </th>
+       <td  mat-cell *matCellDef="let row" >{{row.name}}</td> 
+     
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Description</b></h4></th>
+       <td mat-cell *matCellDef="let row"     >{{row.description}}</td> 
+    </ng-container>
+
+     <!-- Purchasing Price  Column -->
+    <ng-container matColumnDef="purchasingPrice" >
+      
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > <h4><b>Purchasing Price</b></h4> </th>
+       <td  mat-cell *matCellDef="let row" >{{row.purchasingPrice}}</td> 
+     
+    </ng-container>
+     <!-- Salling Price Column -->
+    <ng-container matColumnDef="sallingPrice" >
+      
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > <h4><b>Salling Price</b></h4> </th>
+       <td  mat-cell *matCellDef="let row" >{{row.sallingPrice}}</td> 
+     
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class = "thead-dark"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click) = "onSelectRow(row)" 
+    [ngClass] = "(row.id === selectedItemId)?'bg-info' : ''" ></tr>
+
+    <tr class="mat-row " *matNoDataRow >
+      <td class="mat-cell"  align="center"  colspan="4" >
+        <b><i>No data matching the filter ' {{filterValue}} '</i></b></td>
+    </tr>
+   
+  </table>
+
+  <mat-paginator #paginator
+
+      [length]="totalElements"
+      [pageIndex]="0"
+      [pageSize]="8"
+      [pageSizeOptions]="[8, 16, 24]"
+      showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+

@@ -1,0 +1,147 @@
+
+<ng-template #perishedRemoveForm let-modal> 
+
+    <form (ngSubmit)="onDeletePerished()"> 
+     <div  class = "modal-header bg-dark text-light"> 
+   
+      <h2>Delete Confirmation</h2>
+     <button type = "button" class = "close" aria-describedby="modal-title" (click) = "modal.close('Cross click')" >&times;</button>
+     </div>
+   
+     <div class = "modal-body"> 
+       
+       <strong>Are you sure you want to delete this information ? " </strong>
+   
+       <br><br>
+       Please be careful , all data associated with this Expense will be deleted and <span class = "text-danger"> there is no "undo" operation.</span> 
+     </div>
+   
+     <div class = "modal-footer" > 
+      <button type = "button" class = "btn btn-outline-secondary" ngbAutofocus (click) = "modal.close('Cross click')" >Cancel </button>
+     <button type = "submit" class = "btn btn-danger" >Delete </button>
+     
+     </div>
+   
+   </form>
+   
+   
+   </ng-template>
+  
+  <ng-template #perishedForm  let-modal> 
+  
+  
+  
+      <form (ngSubmit) = "submit()" > 
+        <div class="modal-header bg-dark text-light">
+          <h2 *ngIf="action==actions.CREATE">Add Perished</h2>
+          <h2 *ngIf="action==actions.EDIT">Edit Perished</h2>
+          <button type="button" class="close btn btn-close "
+                        (click)="modal.dismiss('Cross click')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+     <div class = "modal-body"> 
+  
+  
+      <div  class = "form-group"> 
+       <label  for = "category"> 
+         Categories
+       </label>
+       <select [formControl] = "categoryControl" name = "category" class = "form-control"> 
+         <!--option [value] = "-1">All</option-->
+        <option *ngFor = "let category of categories" [ngValue] = "category"> 
+             {{category.name}}
+        </option>
+        </select>
+      </div>
+  
+      <div class = "form-group"> 
+        <label for = "item" > 
+          Items 
+        </label>
+        <select [formControl] = "itemControl" name = "item" class = "form-control" > 
+        <option *ngFor = "let item of items" [ngValue] = "item"> 
+          {{item.name}}
+        </option>
+        </select>
+       </div>
+  
+       <div class = "form-row"> 
+        <div class = "form-group col"> 
+           <label for = "quantity" > Quantity </label>
+           <input type = "number" name = "quantity" class = "form-control" [formControl] = "quantity" >
+           <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched) " class = "col alert alert-danger" > 
+            <div *ngIf="quantity.errors?.required" > 
+              Quantity is required 
+            </div>
+            <div *ngIf="quantity.errors?.min" > 
+             Quantity must be at least 1 unit 
+            </div>  
+          </div>
+        </div>
+        
+        <div class = "form-group col"> 
+          <label for= "price">Price</label>
+          <input type = "number" name = "price" class = "form-control" [formControl] = "price" > 
+          <div *ngIf="price.invalid && (price.dirty || price.touched) " class = "col alert alert-danger" > 
+            <div *ngIf="price.errors?.required" > 
+              Price is required 
+            </div>
+            <div *ngIf="price.errors?.min" > 
+             Price must not be a negative number !
+            </div>
+      </div>
+        </div>
+  
+        <div class = "form-group col-sm-5">
+          <label for = "slaeDate">Purchase Date </label> 
+         <div class = "input-group" >
+         
+          <input  name = "saleDate" class = "form-control" [formControl] = "perishedDate" ngbDatepicker #d ="ngbDatepicker">
+          <div class="input-group-append  ">
+            <button class="btn  btn-outline-secondary  material-icons" (click)="d.toggle()" type="button">
+              calendar_today
+            </button>
+          </div>
+         </div> 
+         <div *ngIf="perishedDate.invalid && (perishedDate.dirty || perishedDate.touched) " class = "col alert alert-danger" > 
+          <div *ngIf="perishedDate.errors?.required" > 
+            Purchase date is required 
+          </div>
+          <div *ngIf="perishedDate.errors?.invalidDate" > 
+            Purchase date must be in past .
+          </div>
+    </div>
+        </div>
+      </div>
+      <div class = "form-group"> 
+        <label for = "saleDescription" > 
+           Purchase Description 
+        </label>
+        <textarea  [formControl] = "description"
+        class = "form-control"
+        rows="6">
+  
+        </textarea>
+        <small  style = "float:right;" >{{description.value.length}}/300</small>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class = "col alert alert-danger"> 
+            <div *ngIf="description.errors?.maxlength" > 
+                The maximum available characters is 300
+              </div>
+              
+             
+              
+        </div>
+    </div>
+    
+     </div>
+     
+    <div class = "modal-footer"> 
+      <button type = "submit" class = "btn btn-dark "> Save</button>
+    </div>
+  
+  
+  
+  
+  
+  
+      </form>
+  </ng-template>

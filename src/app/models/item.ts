@@ -2,6 +2,10 @@ export class Item {
 
 
 
-    constructor(public id : number  ,public  name : string  , public description : string  ) { }
+    constructor(public  name : string  ,
+        public purchasingPrice : number  , 
+        public sallingPrice : number  , 
+         public description : string , 
+         public id ?: number   ) { }
 
 }

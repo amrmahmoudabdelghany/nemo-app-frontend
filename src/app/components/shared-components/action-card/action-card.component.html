@@ -1,0 +1,38 @@
+<div class=" d-flex flex-column flex-lg-column flex-grow-1  "   >
+
+
+    <div class=" container list-group">
+
+        <h2 class=" flex-grow-1 list-group-item l
+                    ist-group-item bg-dark
+                    text-light p-3 rounded-top">
+                    <span class="material-icons ">
+                      input
+                      </span>
+                  &nbsp;   Actions</h2>
+
+
+      <button  (click) = "onCreate()"
+          class = "btn btn-outline-secondary   btn-block list-group-item "><span class="material-icons align-middle">
+            add_circle
+            </span>
+            <span class = "ml-2">Create</span>
+          </button>
+        <button [disabled]="(!actionCartService.editor)"  (click) = "onEdit()" 
+          class = "btn btn-outline-secondary   btn-block list-group-item ">
+          <span class="material-icons  align-middle ">
+            edit
+            </span> 
+             <span class = "ml-2">Edit</span></button>
+          <button [disabled]="(!actionCartService.editor)" (click) = "onRemove()" 
+          class = "btn btn-outline-secondary   btn-block list-group-item ">
+          <span class="material-icons align-middle">
+            remove_circle
+            </span>
+           <span class="ml-2">Remove</span>
+          </button>
+        
+
+
+
+    </div>

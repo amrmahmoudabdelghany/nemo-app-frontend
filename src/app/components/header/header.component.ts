@@ -1,5 +1,6 @@
-import { rendererTypeName } from '@angular/compiler';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+
+import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,28 +8,40 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit , AfterViewInit {
 
   private hr:HTMLLIElement =  this.renderer.createElement("hr") ; 
   private selectedNavItem : any   ; 
-  constructor(private renderer:Renderer2) { 
+  @ViewChild("stock") stockElement : any  ; 
+  constructor(private renderer:Renderer2 , private router : Router  ) { 
 
   }
 
   ngOnInit(): void {
     this.hr.setAttribute("style"  , "width : 50px ;border : 1px solid black ; " ) ; 
+    
+    
   }
 
+  ngAfterViewInit() { 
+  
 
-  onSelectNavItem(ele : any ) { 
+    this.renderer.appendChild(this.stockElement.nativeElement , this.hr) ; 
+    this.selectedNavItem = this.stockElement ; 
+  }
+
+  onSelectNavItem(ele : any  , uri : string) { 
    
-    if(this.selectedNavItem != null) { 
+    
+    if(this.selectedNavItem != null && this.selectedNavItem != ele) { 
       this.renderer.removeChild(this.selectedNavItem ,this.hr) ; 
     }
-    console.log(ele) ; 
+    
+   // this.renderer.appendChild(this.stockElement , this.hr) ; 
     this.renderer.appendChild(ele , this.hr) ;  
     this.selectedNavItem = ele ; 
-    
+    this.router.navigate( [uri]) ; 
+  
   }
 
 }

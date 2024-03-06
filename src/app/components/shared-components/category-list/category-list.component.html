@@ -1,0 +1,119 @@
+ 
+ <ng-template #categoryForm let-modal >
+
+	<form (ngSubmit) = "onSave()"> 
+		<div class = "modal-header bg-dark text-light"> 
+			<h2>Category Form </h2>
+		</div>
+		<div class = "modal-body"> 
+			<div class = "form-group"> 
+				<label>Category Name </label>
+				 <input class = "form-control" type = "text" [formControl] = "categoryNameControl" >
+				 <div *ngIf="categoryNameControl.invalid && (categoryNameControl.dirty || categoryNameControl.touched) " 
+				
+				 class = "col alert alert-danger" > 
+					<div *ngIf="categoryNameControl.errors?.required" > 
+					  Category Name is required 
+					</div>
+					<div *ngIf="categoryNameControl.errors?.maxlength">
+					 Category Name is too long 
+					</div> 
+					<div *ngIf="categoryNameControl.errors?.existsName">
+						Category Name is already exists.
+					   </div> 
+				
+					
+					
+					
+			  </div>
+			</div>
+		</div>
+		<div class = "modal-footer"> 
+			<button id="btn-save" type="submit" class="btn btn-dark">Save</button>
+		</div>
+	</form>
+ </ng-template> 
+
+
+
+ <ng-template #categoryRemoveDialog let-modal> 
+
+	<form (ngSubmit)="onConfirmDelete()"> 
+	 <div  class = "modal-header bg-dark text-light"> 
+   
+	  <h2>Delete Category Confirmation</h2>
+	 <button type = "button" class = "close" aria-describedby="modal-title" (click) = "modal.close('Cross click')" >&times;</button>
+	 </div>
+   
+	 <div class = "modal-body"> 
+	   
+	   <strong>Are you sure you want to delete "<span class = "text-primary">{{selectedCategory?.name}}</span>" category ?  </strong>
+   
+	   <br><br>
+	   Please be careful ,  <span class = "text-danger"> there is no "undo" operation.</span> 
+	 </div>
+   
+	 <div class = "modal-footer" > 
+	  <button type = "button" class = "btn btn-outline-secondary" ngbAutofocus (click) = "modal.close('Cross click')" >Cancel </button>
+	 <button type = "submit" class = "btn btn-danger" >Delete </button>
+	 
+	 </div>
+   
+   </form>
+   
+   
+   </ng-template>
+   
+ 
+ <div  class="d-flex flex-column flex-grow-1  "  >
+	<div class="category-list-head flex-grow-1 p-3 bg-dark rounded-top " >
+
+		<h2 class=" text-light float-left  ml-1 my-1">
+			<span class="material-icons">
+				category
+				</span> &nbsp;
+			Categories</h2>
+		<!--  lets try badge -->
+		<small class="badge badge-info badge-pill float-right mt-3 mb-0 mr-1" >
+            {{categories.length}}
+		</small>
+		<!-- 			 <small class = "text-light float-right mb-0 mt-3 mr-1">10 categories</small> -->
+	</div>
+
+	<div class="flex-grow-2 overflow-scroll list-group border-left "
+		style="overflow-y: scroll; max-height: 450px" role="tablist">
+
+		<a 
+			class="list-group-item list-group-item-action border-right-0 border-left-0 "
+			data-toggle="list" 
+			[ngClass] = "(selectedCategory.id == -1)? 'list-group-item-info' : ''"
+ 			 (click) = "selectCategory({id:-1 , name:'All'})" 
+			> All</a> 
+
+		<a *ngFor ="let category of categories"
+			class="list-group-item list-group-item-action border-right-0 border-left-0 "
+			[ngClass] = "(selectedCategory.id == category.id)? 'list-group-item-info' : ''"
+			data-toggle="list"  (click) = "selectCategory(category)" 
+			> {{category.name}}</a> 
+
+	</div>
+	<div class="flex-grow-2 list-group ">
+		<div class = "list-group-item list-group-item-action p-0"> 
+			<button (click) = "modal.open(categoryForm , {centered:true}) ;createAction = true ; " class="  btn btn-outline-primary w-100 mt-2 " 
+			>Create</button>
+		</div>
+			<div class = "list-group-item list-group-item-action p-0"> 
+				<button [disabled] = "selectedCategory.id == -1"
+				(click) = "modal.open(categoryForm , {centered:true}); createAction = false ;onEdit();" 
+				class="  btn btn-outline-primary w-100 mt-2" 
+				>Edit</button>
+				</div>
+
+			<div class = "list-group-item list-group-item-action p-0"> 
+			<button [disabled] = "selectedCategory.id == -1"
+			(click) = "modal.open(categoryRemoveDialog , {centered:true})  " class="  btn btn-outline-primary w-100 mt-2" 
+			>Remove</button>
+		</div>
+	</div>
+
+</div>

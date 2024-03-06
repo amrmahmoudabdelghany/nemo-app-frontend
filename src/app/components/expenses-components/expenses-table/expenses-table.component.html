@@ -1,0 +1,67 @@
+<div class ="d-flex justify-content-between align-items-center" > 
+  <nav aria-label="breadcrumb" >
+
+    <ol class = "breadcrumb mb-2" *ngIf = "(selectedCategory.id == -1 && selectedItem.id == -1) ; else elseBlock" > 
+     <li class = "breadcrumb-item" >
+       All
+     </li> 
+    </ol>
+    <ng-template #elseBlock >   
+       <ol  class="breadcrumb mb-2">
+      <li class="breadcrumb-item">{{selectedCategory.name}}</li>
+      <li class = "breadcrumb-item active">{{selectedItem.name}}</li>
+    </ol>
+  </ng-template>
+
+  </nav>
+
+
+<label> Search :  <input [formControl] = "filterControl"  type = "text"   /> </label>
+</div>
+
+
+<div class="mat-elevation-z8">
+  <table mat-table  [dataSource] = "exps" 
+  class="full-width-table table table-hover justify-content-between" 
+   matSort matSortActive="purchaseDate" matSortDirection="desc" (matSortChange) = "resetPaging()"
+    aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="purchaseDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Purchase Date</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.purchaseDate}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="item.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Item Name</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.item.name}}</td>
+    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Purchase Description</b></h4></th>
+        <td mat-cell *matCellDef="let row">{{row.description}}</td>
+      </ng-container>
+        <!-- Name Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Quantity</b></h4></th>
+      <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="purchasePrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><h4><b>Price</b></h4></th>
+        <td mat-cell *matCellDef="let row">{{row.purchasePrice}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class = "thead-dark"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="(selectedExp != null && row == selectedExp)?'bg-info':''"
+       (click)="onSelectRow(row)"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="totalElements"
+      [pageIndex]="0"
+      [pageSize]="8"
+      [pageSizeOptions]="[8, 16, 24]">
+  </mat-paginator>
+</div>

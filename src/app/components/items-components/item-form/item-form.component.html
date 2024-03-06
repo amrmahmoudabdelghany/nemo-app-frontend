@@ -1,0 +1,165 @@
+<ng-template #ItemRemoveDialog let-modal> 
+
+ <form (ngSubmit)="onDeleteItem()"> 
+  <div  class = "modal-header bg-dark text-light"> 
+
+   <h2>Delete Item Confirmation</h2>
+  <button type = "button" class = "close" aria-describedby="modal-title" (click) = "modal.close('Cross click')" >&times;</button>
+  </div>
+
+  <div class = "modal-body"> 
+    
+    <strong>Are you sure you want to delete "<span class = "text-primary">{{selectedItem?.name}}</span>" item ?  </strong>
+
+    <br><br>
+    Please be careful , all data associated with this item will be deleted and <span class = "text-danger"> there is no "undo" operation.</span> 
+  </div>
+
+  <div class = "modal-footer" > 
+   <button type = "button" class = "btn btn-outline-secondary" ngbAutofocus (click) = "modal.close('Cross click')" >Cancel </button>
+  <button type = "submit" class = "btn btn-danger" >Delete </button>
+  
+  </div>
+
+</form>
+
+
+</ng-template>
+
+
+
+<!--
+    <div class="modal-header">
+      <h2 *ngIf="action == actions.CREATE" class="modal-title">
+          Create Item
+        </h2>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    
+<form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4">Subscribe</p>
+  
+    <p>Join our mailing list. We write rarely, but only with the best content.</p>
+  
+    <p>
+      <a href="" target="_blank">See the last newsletter</a>
+    </p>
+  
+    
+    <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Name">
+  
+    
+    <input type="email" id="defaultSubscriptionFormEmail" class="form-control mb-4" placeholder="E-mail">
+  
+   
+    <button mdbBtn color="info" block="true" type="submit">Sign in</button>
+  
+  
+  </form>
+ 
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+-->
+
+<ng-template #ItemForm let-modal>
+			
+					<form (ngSubmit)="onSubmit()" #itemForm = "ngForm">
+						<div class="modal-header bg-dark text-light">
+							<h2 *ngIf="action==actions.CREATE">Create Item</h2>
+              <h2 *ngIf="action==actions.EDIT">Edit Item</h2>
+							<button type="button" class="close btn btn-close "
+                            (click)="modal.dismiss('Cross click')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+						<div class="modal-body">
+
+
+					
+							<div class="form-group">
+								<label for="itemCategory">Item Category</label>
+                                 <select required [(ngModel)] = "itemModel.categoryId"
+									class="form-control" id="itemCategory" #categoryControl = "ngModel" name = "category" >
+									<option *ngFor = "let category of categories"
+										 [value] = "category.id">
+                                      {{category.name}}
+									</option>
+
+								</select>
+                                <div [hidden]="categoryControl.valid || categoryControl.pristine" class="alert alert-danger">
+                                    Category is required
+                                  </div>
+							</div>
+							<div class="form-group">
+								<label for="itemName">Item Name</label>
+                  <input required #itemNameCont="ngModel"
+									class="form-control" type="text" id="itemName"
+									placeholder="Enter Item Name" [(ngModel)] = "itemModel.item.name" name = "itemName"> 
+                  <small
+									class="form-text text-muted">Please note that Name of
+									the item must be unique</small>
+                  <div [hidden]="itemNameCont.valid || itemNameCont.pristine" class="alert alert-danger">
+                    Category is required
+                  </div>
+							</div>
+              <div class = "form-row"> 
+              <div class="form-group col">
+								<label for="itemPurchasingPrice">Purchasing Price</label>
+                  <input type = "number" required #itemNameCont="ngModel"
+									class="form-control"  id="itemPurchasingPrice"
+									placeholder="Enter Purchasing Price" [(ngModel)] = "itemModel.item.purchasingPrice" name = "purchasingPrice"> 
+                  
+                  <div [hidden]="itemNameCont.valid || itemNameCont.pristine" class="alert alert-danger">
+                    Purchasing Price is required
+                  </div>
+							</div>
+              <div class="form-group col">
+								<label for="itemSallingPrice">Salling Price</label>
+                  <input type = "number" required #itemNameCont="ngModel"
+									class="form-control"  id="itemSallingPrice"
+									placeholder="Enter Salling Price" [(ngModel)] = "itemModel.item.sallingPrice" name = "sallingPrice"> 
+                  
+                  <div [hidden]="itemNameCont.valid || itemNameCont.pristine" class="alert alert-danger">
+                    Salling Price is required
+                  </div>
+							</div>
+            </div>
+
+                            <div class = "form-group">
+                                <label for = "itemDescription">Item Description</label>
+                                <textarea class = "form-control" 
+                                          rows="6"
+                                          id="itemDescription"
+                                          name = "itemDesciption"
+                                          wrap="hard"
+                                          placeholder ="Enter Item Desciption"
+                                          [(ngModel)] = "itemModel.item.description"
+
+                                          >
+                                              
+                                </textarea>
+                            </div>
+							
+
+
+
+						</div>
+						<div class="modal-footer ">
+
+
+							<button id="btn-save" type="submit" class="btn btn-dark">Save</button>
+
+
+						</div>
+					</form>
+				
+
+		
+  </ng-template>

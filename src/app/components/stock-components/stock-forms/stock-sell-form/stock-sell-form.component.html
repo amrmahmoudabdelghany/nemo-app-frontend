@@ -1,0 +1,125 @@
+<ng-template #sellForm let-modal > 
+
+    <form (ngSubmit)="submit()"> 
+        <div class = "modal-header bg-dark text-light" > 
+            <!--span class="material-icons">
+                sell
+                </span-->
+          <h2>Sale </h2>
+          <button type="button" class="close btn btn-close "
+          (click)="modal.dismiss('Cross click')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+
+        <div class = "modal-body"> 
+           <!--(Item Name)-->
+          
+            <div class = "form-group row" > 
+                <label for="itemName" class = "col-sm-3 col-form-label "> 
+                     <b>Item Name :</b> 
+                </label>
+               <div class = "col">  
+                   
+                <input style = "font-size: large;" class = "form-control-plaintext text-info " id = "itemName" readonly value = "{{selectedStock?.item?.name}}" > 
+            
+               </div>
+            
+         </div>
+         <div class = "form-group row"> 
+            <label for="salePrice" class = "col-sm-3 col-form-label"> 
+                <b>Selling Price :</b>
+           </label>
+          <div class = "col-sm-4">  
+              
+           <input class = "form-control-plaintext text-info" 
+           id = "salePrice" readonly value = "{{selectedStock?.item?.sallingPrice}}  LE / unit" > 
+       
+          </div>
+          <label for="stockQuantity" class = "col-sm-2 col-form-label"> 
+            <b>Quantity</b>
+           </label>
+           <div class = "col-sm"> 
+           <input class = "form-control-plaintext text-info"
+            id = "stockQuantity"
+             readonly value = "{{selectedStock?.quantity}} unit" > 
+        </div>
+
+         </div>
+            <div class = "form-row" > 
+                <!-- (Item Quantity)-->
+            <div class = "form-group col " >
+                <label for="saleQuantity"><b>Sold Quantity</b>  </label>
+                <input [formControl] = "quantity" 
+                class = "form-control" 
+                type = number 
+                id ="saleQuantity"
+                 value = "1"
+                 > 
+                 <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched) " class = "col alert alert-danger" > 
+                       <div *ngIf="quantity.errors?.required" > 
+                         Quantity is required 
+                       </div>
+                       <div *ngIf="quantity.errors?.limitexceeded == true">
+                        Required Quantity exceeds limit
+                       </div> 
+                       <div *ngIf="quantity.errors?.min" > 
+                        Quantity must be at least 1 unit
+                       </div>
+                      
+                       
+                       
+                       
+                 </div>
+            </div>
+            <!-- (Sale Price)-->
+            <div class = "form-group col" >
+                <label for="price"><b>Sale Price</b>  </label>
+                <input 
+                [formControl] = "price"
+                class = "form-control"
+                 type = number
+                  id ="price"
+                  value = "selectedStock?.item?.sallingPrice"
+                  >
+                  <div *ngIf="price.invalid && (price.dirty || price.touched) " class = "col alert alert-danger" > 
+                    <div *ngIf="price.errors?.required" > 
+                      Price is required 
+                    </div>
+                    <div *ngIf="price.errors?.min" > 
+                     Price must not be a negative number !
+                    </div>
+                   
+                    
+                    
+                    
+              </div>
+            </div>  
+            </div>
+
+            <div class = "form-group"> 
+                <label for = "saleDescription" > 
+                  <b> Sale Description </b>
+                </label>
+                <textarea  [formControl] = "description"
+                class = "form-control"
+                rows="6">
+
+                </textarea>
+                <small  style = "float:right;" >{{description.value.length}}/300</small>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" class = "col alert alert-danger"> 
+                    <div *ngIf="description.errors?.maxlength" > 
+                        The maximum available characters is 300
+                      </div>
+                      
+                     
+                      
+                </div>
+            </div>
+        </div>
+
+        <div class = "modal-footer" > 
+            <button type = "submit" class = "btn btn-dark "> Save</button>
+        </div>
+    </form>
+
+
+</ng-template>
